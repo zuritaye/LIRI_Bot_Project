@@ -1,60 +1,60 @@
-//code to read & set variables with the dotenv package
 require("dotenv").config();
 
-//add code to import the keys.js file 
-var spotify = new Spotify(keys.spotify);
+var Twitter = require("twitter");
+var keys = require("./keys.js");
+var client = new Twitter({
+    consumer_key: '',
+    consumer_secret: '',
+    access_token_key: '',
+    access_token_secret: ''
+});
+
 var client = new Twitter(keys.twitter);
+var params = {screen_name: 'nodejs' , count: 20};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets);
+  }
+});
 
-var Twitter = require('twitter');
-var Spotify = require('node-spotify-api');
-
-//Node liri.js my-tweets
-//System to display last 20 tweets & when created
-function myTweets(display, created) {
-    this.display = display;
-    this.created = created;
-    this.showLast = function() {
-        if(this.display === true) {
-            console.log(this.created);
-        }
-    };
+var userInput = process.argv[2];
+if (userInput === "my-tweets") {
+  var client = new Twitter({
+    consumer_key: "XgQ7n5niSrXx1saNBf0EhM0TM",
+    consumer_secret: "tCEObTGl3Ajn14ecIWRuJx4bzqgRPUXSN8vrvqFfkczWvoYfzX",
+    access_token_key: "1021175593587609600-GB4tvishGiGh5YWfX3VLsW6S3C6vck",
+    access_token_secret: "PEJAOZOca3l6Pbd6lDLA1kncKxA6VZy5j43ky8kkw1JEN"
+  });
 }
-var Twitter = new myTweets(true, "Display last 20 Tweets" + "When created.");
 
-Twitter.showLast();
+// var Spotify = require('node-spotify-api');
+// var keys = require("./keys.js");
+// var spotify = new Spotify({
+//     id: '',
+//     secret: '',
+//   });
 
-//Node liri.js spotify-this-song '<song name here>'
-//System displays; artists, song name, preview link, album
-//If no song provided, system defaults to "The Sign" by Ace of Base
-function Songs(artists, song, link, album){
-    this.artists = artists;
-    this.song = song;
-    this.link = link;
-    this.album = album;
+//   var spotify = new Spotify(keys.spotify);
+  
+//   spotify
+//   .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+//   .then(function(data) {
+//     console.log(data); 
+//   })
+//     .catch(function(err) {
+//         console.error('Error occurred: ' + err); 
+//   });
+  
+//  function newFunction() {
+//    return require("./userInput"); 
 
-    this.printstats = function() {
-        console.log("Songs" + this.artists + this.song + this.link + this.album)
-    };
-    this.information = function(){
-        if(this.Songs == true){
-            console.log('this.artists' + 'this.song' + 'this.link' + 'this.album');
-        }
-        else{
-            console.log("The Sign by Ace of Base");
-        }
-    }
-}
-    
+//    var userInput = process.argv[3];
+//    else if(userInput === "spotify-this-song"){
+//     var spotify = new Spotify({
+//         SPOTIFY_ID="6e5ae10d94a945c49b8096009153798a",
+//         SPOTIFY_SECRET="27c4900e9c3442d4b55cfe929fd47cfe"
+//      });
+//     }
+//   }
 
-
-
-
-
-
-
-
-
-
-
-
-
+//     import Spotify from 'node-spotify-api';
